@@ -1,0 +1,90 @@
+<?php
+require('inc/common.php');
+
+$link = clean($_GET['link']);
+
+$good = getRow("SELECT * FROM {$prx}goods WHERE status=1 AND link='{$link}'");
+// ----------- АНАЛОГИ -------------------
+//var_dump($good);
+$analogues = get_good_analogues($good['id']);
+if(sizeof($analogues))
+{
+    // удаляем из массива текущий товар
+    $key = array_search($good['id'],$analogues);
+    if($key!==false)
+        unset($analogues[$key]);
+}
+//print_r($analogues);
+if(sizeof($analogues))
+{
+    $query = "SELECT B.kol,A.*,M.link as mlink FROM {$prx}goods A
+						LEFT JOIN (SELECT articul,SUM(kol) AS kol FROM {$prx}ost GROUP BY articul) B ON A.articul=B.articul
+						LEFT JOIN {$prx}makers M ON A.id_maker=M.id
+						WHERE A.STATUS=1 and A.id IN(".implode(',',$analogues).")";
+    $res = mysql_query($query);
+    $rowspan = sizeof($analogues)*2-1 + 2;
+    ?>
+    <table class="list_tab" width="100%" style="margin:0 0 20px 0">
+    <tr class="tr_head">
+        <td class="td1_left" height="32"><?=get_tr('left','1')?></td>
+        <td style="background-color:#fff; padding:0 5px;"><span>Артикул</span></td>
+        <th rowspan="<?=$rowspan?>"></th>
+        <td width="100%" style="background-color:#fff;"><span>Наименование</span></td>
+        <th rowspan="<?=$rowspan?>"></th>
+        <td style="background-color:#fff; padding:0 5px;"><span>Фирма</span></td>
+        <th rowspan="<?=$rowspan?>"></th>
+        <? if($user_showmaker) { ?>
+            <td style="background-color:#fff; padding:0 5px;"><span>Поставщик</span></td>
+            <th rowspan="<?=$rowspan?>"></th>
+        <?	}	?>
+        <td style="background-color:#fff; padding:0 5px;"><span>Кол-во</span></td>
+        <th rowspan="<?=$rowspan?>"></th>
+        <td nowrap style="background-color:#fff; padding:0 0 0 5px;"><span>Цена, руб.</span></td>
+        <td class="td1_right"><?=get_tr('right','1')?></td>
+    </tr>
+    <tr>
+        <td colspan="13" class="sep_head"></td>
+    </tr>
+    <?
+    $i=0;
+    while($arr = @mysql_fetch_assoc($res))
+    {
+        $articul = $arr['articul'];
+        $price = get_good_price($arr);
+        $kol = get_good_kol($arr);
+        $status = get_good_status($arr);
+
+        $num = ++$i%2==1 ? 2 : 1;
+        $color = $num==2 ? '#fff' : '#fff';
+        $maker_postav = getArr("SELECT DISTINCT maker FROM {$prx}ost WHERE articul='{$articul}'");
+
+        ?>
+        <tr class="tr_str">
+            <td class="td<?=$num?>_left" height="32"><?=get_tr('left',$num)?></td>
+            <td style="background-color:<?=$color?>; text-align:left; padding:0 5px;"><?=$articul?></td>
+            <td style="background-color:<?=$color?>; text-align:left; padding:0 5px;">
+                <a href="/makers/<?=$arr['mlink']?>/<?=$arr['link']?>.htm"><?=$arr['name']?></a>
+            </td>
+            <td style="background-color:<?=$color?>; text-align:left; padding:0 5px;">
+                <?
+                if($maker = gtv('makers','link,name',$arr['id_maker']))
+                {
+                    ?><a href="/makers/<?=$maker['link']?>/"><?=$maker['name']?></a><?
+                }
+                ?>
+            </td>
+            <? if($user_showmaker) { ?>
+                <td style="background-color:<?=$color?>; text-align:left; padding:0 5px;"><?=implode('<br>', (array)$maker_postav)?></td>
+            <?	}	?>
+            <td style="background-color:<?=$color?>; padding:0 5px;"><?=$kol?></td>
+            <td style="background-color:<?=$color?>; padding:0 0 0 5px;"><?=$price?></td>
+            <td class="td<?=$num?>_right"><?=get_tr('right',$num)?></td>
+        </tr>
+        <tr>
+            <td colspan="13" class="sep_tr"></td>
+        </tr>
+    <?
+    }
+    ?></table><?
+}
+?>

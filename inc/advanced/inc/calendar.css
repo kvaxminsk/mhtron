@@ -1,0 +1,22 @@
+table.calendar {
+	border-collapse: collapse; 
+	background-color: white;
+}
+table.calendar tr th {
+	color:#808080;
+	background-color:#E8EBF1;
+}
+table.calendar tr td, table.calendar tr th {
+	padding: 2px 3px 2px 3px;
+	border: 1px solid #CDD7DF;
+	text-align:center;
+}
+table.calendar tr td.weekend {
+	background-color: #F4F4F4;
+}
+table.calendar td.today {
+	background-color:#80DCFF;
+}
+table.calendar tr td.active {
+	background-color: #FFFF80;
+}

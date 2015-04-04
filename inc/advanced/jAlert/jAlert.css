@@ -1,0 +1,51 @@
+#jAlert
+{
+	position:absolute;
+	/*width:300px;*/
+	min-width:250px;
+	width:auto;
+	min-height:110px;
+	height:auto;
+	background-color:#FFF;
+	display:none;
+	-moz-box-shadow: 0 0 5px #2c2b29;
+	-webkit-box-shadow: 0 0 5px #2c2b29;
+	-khtml-box-shadow: 0 0 5px #2c2b29;
+	box-shadow: 0 0 5px #2c2b29;
+}
+#jAlert .info_place
+{
+	padding:20px 20px 0 20px;
+	font:normal 12px Arial;
+	color:#736e5f;
+	text-align:left;
+	line-height:18px;
+}
+#jAlert .info_place span
+{
+	font-size:10px;
+	color:#918c7d;
+}
+#jAlert .btn_place
+{
+	height:30px;
+	padding:20px 20px 0 20px;
+	margin-bottom:20px;
+}
+#jAlert .btn_place a { display:inline-block; }
+#jAlert .btn_place div { cursor:pointer; }
+#jAlert .btn_place .ok div { width:47px; height:21px; background:url(/inc/advanced/jAlert/jAlert.png) scroll no-repeat 0 -42px; }
+#jAlert .btn_place .ok:hover div { background:url(/inc/advanced/jAlert/jAlert.png) scroll no-repeat -47px -42px; }
+#jAlert .btn_place .yes { margin-right:40px; }
+#jAlert .btn_place .yes div { width:47px; height:21px; background:url(/inc/advanced/jAlert/jAlert.png) scroll no-repeat 0 0; }
+#jAlert .btn_place .yes:hover div { background:url(/inc/advanced/jAlert/jAlert.png) scroll no-repeat -47px 0; }
+#jAlert .btn_place .no div { width:47px; height:21px; background:url(/inc/advanced/jAlert/jAlert.png) scroll no-repeat 0 -21px; }
+#jAlert .btn_place .no:hover div { background:url(/inc/advanced/jAlert/jAlert.png) scroll no-repeat -47px -21px; }
+
+#jAlert_shadow
+{
+	position:absolute;
+	background-color:#2c2b29;
+	filter:progid:DXImageTransform.Microsoft.Blur(pixelradius=4, enabled="true");
+	display:none;
+}

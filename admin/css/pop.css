@@ -1,0 +1,28 @@
+#tab
+{
+	width:100%;
+	margin:0 0 0 0;
+	border-collapse:collapse;
+	border-color:#ecf0fb;
+}
+#tab th, #tab td 
+{ 
+	padding:3px 5px;
+	border:1px solid #93acd0;
+}
+#tab th
+{
+	background-color:#d4dff2;
+	color:#3e6aaa;
+	font:bold 12px Arial, Helvetica, sans-serif;	
+}
+#tab td
+{
+	color:#697079;
+	font:normal 12px Arial, Helvetica, sans-serif;
+}
+#tab input { padding:0; margin:0; }
+
+#filters { margin:5px 0 0 0; background-color:#d4dff2; }
+#filters td { font:normal 11px Arial, Helvetica, sans-serif; padding-right:5px; color:3e6aaa; }
+#filters select { font:normal 11px Arial, Helvetica, sans-serif; }

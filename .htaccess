@@ -1,0 +1,86 @@
+﻿<IfModule mod_charset.c>
+  CharsetDisable On
+</IfModule>
+AddDefaultCharset UTF-8
+php_value default_charset utf-8
+
+#php_flag register_globals off
+#php_flag display_errors off
+
+ErrorDocument 403 /errors.php?code=403
+ErrorDocument 404 /errors.php?code=404
+
+Options -Indexes
+
+DirectoryIndex index.php
+
+Options +FollowSymlinks
+RewriteEngine on
+RewriteBase /
+RewriteRule ^.htaccess$ - [F]
+
+# ------------- !!! Универсалки
+RewriteRule ^([^\/.]+)$ $1/ [R=301,L]
+#RewriteRule ^([^\/.]+)/([^\/.]+)$ $1/$2/ [R=301,L]
+RewriteRule ^(.*)/([0-9\-]+)x([0-9\-]+)/(.*).jpg$ inc/ir_cache.php?path=/uploads/$1/&fname=$4&width=$2&height=$3
+RewriteRule ^goods/(.*).jpg$ uploads/goods/$1.jpg
+RewriteRule ^kpp_goods/(.*).jpg$ uploads/kpp_goods/$1.jpg
+RewriteRule ^kpp_cat/(.*).jpg$ uploads/kpp_cat/$1.jpg
+
+# страницы
+RewriteRule ^pages/([a-zA-Z0-9_\-]+).htm$ show_pages.php?link=$1
+
+# новости
+RewriteRule ^news/(.*)$ show_news.php?id=0$1
+RewriteRule ^news/([0-9]+).htm$ show_news.php?id=$1
+
+# статьи
+RewriteRule ^articles/(.*)$ show_articles.php?id=0$1
+RewriteRule ^articles/([0-9]+).htm$ show_articles.php?id=$1
+
+# тягачи
+RewriteRule ^avto/([0-9]+).htm$ show_avto.php?id=$1
+RewriteRule ^avto/(.*)$ show_avto.php?none$1
+
+# FAQ
+RewriteRule ^faq/$ show_faq.php
+
+# каталог
+	#RewriteRule ^catalog$ catalog/ [R=301,L]
+	#RewriteRule ^catalog/$ show_catalog.php
+	#RewriteRule ^catalog/([0-9]+)/(.*)$ show_catalog.php?cat=$1$2
+	#RewriteRule ^catalog/([0-9]+)$ catalog/$1/ [R=301,L]
+RewriteRule ^makers/$ show_makers.php
+RewriteRule ^makers/([a-zA-Z0-9_\-]+)$ makers/$1/ [R=301,L]
+RewriteRule ^makers/([a-zA-Z0-9_\-]+)/([a-zA-Z0-9_\-]+).htm$ show_goods.php?mlink=$1&glink=$2
+RewriteRule ^makers/([a-zA-Z0-9_\-]+)/(.*)$ show_makers.php?mlink=$1$2
+
+
+#каталог КПП
+RewriteRule ^kpp_cat/$ show_kpp_cat.php
+RewriteRule ^kpp_cat/([0-9]+)/(.*)$ show_kpp_cat.php?id=$1$2
+RewriteRule ^kpp_cat/([0-9]+)$ kpp_cat/$1/ [R=301,L]
+
+
+# распродажа
+RewriteRule ^sale/(.*)$ show_sale.php?x=$1
+
+# товары
+#RewriteRule ^goods/([0-9]+).htm$ show_goods.php?id=$1
+
+# профиль
+RewriteRule ^profile/$ show_profile.php
+
+# организации
+RewriteRule ^organizations/$ show_organizations.php
+
+# заказы (корзина)
+RewriteRule ^cart/(.*)$ cart.php?x=$1
+
+# -------------- баннеры
+# катринки
+RewriteRule ^banners/([0-9]+).(jpg|gif|png|swf)$ uploads/banners/$1.$2
+#
+
+# сообщения
+RewriteRule ^messages/$ show_order_messages.php

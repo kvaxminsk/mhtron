@@ -1,0 +1,391 @@
+@charset "utf-8";
+
+body, html { height:100%; }
+*
+{
+	padding:0;
+	margin:0;
+}
+body,td,th 
+{
+	font:normal 12px Georgia, "Times New Roman", Times, serif;
+	color:#040404;
+}
+table 
+{
+	border-collapse:collapse; 
+}
+body {  background-color:#EAE9E9; }
+
+img { border:none; }
+
+#center { padding:15px 0 120px 0; }
+#center, #center td, #center th { font:normal 16px "Times New Roman", Times, serif; }
+
+h1
+{
+	font:bold 18px Georgia, "Times New Roman", Times, serif;
+	font-style:italic;
+	color:#000;
+	margin:0 0 15px 0;
+}
+h2
+{
+	font:bold 16px Georgia, "Times New Roman", Times, serif;
+	font-style:italic;
+	color:#99cf16;
+	margin:0 0 15px 0;
+}
+h3
+{
+	font:normal 16px Georgia, "Times New Roman", Times, serif;
+	font-style:italic;
+	
+	margin:0 0 10px 0;
+}
+
+.htext
+{
+	font:bold 16px Georgia, "Times New Roman", Times, serif;
+	color:#080c43;
+	margin:0 0 10px 0;
+}
+
+/* ссылки в тексте + заголовки новостей */
+a
+{
+	font:normal 12px Georgia, "Times New Roman", Times, serif;
+	font-style:italic;
+	color:#3ea304;
+	text-decoration:underline;
+}
+a:hover { text-decoration:none; }
+
+a.kpp_a.active, a.kpp_a.active:hover { color:#3ea304!important; font-weight:bold; }
+
+/* "Вход", "Регистрация" */
+.link, .link:visited {  font-size:14px; }
+.link:hover { font-size:14px; }
+/* "Быть вкурсе" */
+.link1, .link1:visited, .link1:hover { }
+
+.linkv { font-size:14px; color:#6f4828; font-style:normal; }
+
+.back { margin-top:20px; }
+.nofind { text-align:center; font-size:18px; padding-top:40px;}
+.nofind a { font-size:18px;}
+
+#ajax { width:100%; display:none; }
+
+#arr_content { width:100%; height:100%; }
+#content
+{
+	height:100%;
+	max-width:1280px;
+	min-width:1001px;
+	width:expression((document.documentElement.clientWidth||document.body.clientWidth)<1001?'1001px':(document.documentElement.clientWidth||document.body.clientWidth)>1280?'1280px':'100%');
+}
+
+.numer { font-family:"Times New Roman", Times, serif; }
+
+#logo { position:relative; width:241px; height:136px; background:url(/img/logo.png) no-repeat; cursor:pointer; }
+
+#mtab { margin:0 0 35px 0; }
+#mtab td { height:25px; }
+.mlink, .mlink:visited { font-size:16px; color:#603b1d; }
+.mlink:hover { color:#080c43; }
+.mlink_, .mlink_:visited, .mlink_:hover { font-weight:bold; color:#603b1d; text-decoration:none; }
+
+.phone { font: normal 16px "Times New Roman", Times, serif;  }
+.manager { font:normal 16px "Times New Roman", Times, serif; color:#3ea304; }
+
+.pole
+{
+	height:20px;
+	border-collapse:collapse;
+	border:1px solid #99cf16;
+	background-color:#fff;
+	font:normal 14px "Times New Roman", Times, serif;
+	color:#00437f;
+	padding:0 5px;
+}
+.pole1
+{
+	height:18px;
+	border-collapse:collapse;
+	border:1px solid #80a1bf;
+	background-color:#fff;
+	font:normal 14px "Times New Roman", Times, serif;
+	color:#00437f;
+	padding:0 5px;
+}
+.pole2
+{
+	width:100%;
+	height:18px;
+	border-collapse:collapse;
+	border:1px solid #99cf16;
+	background-color:#fff;
+	font:normal 14px "Times New Roman", Times, serif;
+	color:#00437f;
+	padding:0 5px;
+}
+textarea
+{
+	background-color:#FFF;
+	border:1px solid #99cf16;
+	font:normal 14px "Times New Roman", Times, serif;
+	color:#00437f;
+	vertical-align:middle;
+	padding:10px;
+	overflow-y:auto;
+}
+.select { font:normal 14px "Times New Roman", Times, serif; }
+
+#up_tab { width:100%; height:100%; }
+#up_tab td { font-size:14px; color:#603B1D; }
+
+#loupe
+{
+	position: absolute;
+	width:220px;
+	height:241px;
+	right:0;
+	z-index:0;
+}
+
+#st1, #st2
+{
+	height:25px;
+	width:50%;
+	background-color:#FFF;
+	border:1px solid #99cf16;
+	font:normal 14px "Times New Roman", Times, serif;
+	color:#00437f;
+	vertical-align:middle;
+	padding:0 10px;
+}
+
+#cart_count, #cart_itogo { font-family:"Times New Roman", Times, serif; }
+
+#banners_top { float:left; margin-top:-10px; }
+#banners_left { margin-top:30px; }
+#banners_left div { margin-bottom:10px; }
+
+
+#ml { width:100%; }
+#ml td { color:#00437f; }
+#ml a, #ml a:visited, #ml a:hover
+{
+	font:normal 14px Georgia, "Times New Roman", Times, serif;
+	font-style: normal;
+	color:#00437f;
+}
+#ml span
+{
+	color:#99cf16;
+}
+
+.aml { width:100%; }
+.aml_lu { height:10px; padding-left:10px; background:url(/img/aml_lu.png) no-repeat; }
+.aml_u { width:100%; background:white; }
+.aml_ru { padding-left:10px; background:url(/img/aml_ru.png) no-repeat; }
+	.aml_l { background:white; }
+	.aml_c { background-color:white; padding:5px 10px; }
+	.aml_r { background:white; }
+.aml_lb { height:10px; background:url(/img/aml_lb.png) no-repeat; }
+.aml_b { background-color:white; }
+.aml_rb { background:url(/img/aml_rb.png) no-repeat; }
+
+.nh { width:100%; height:17px; background-color:#fff; margin:0 0 5px 0; }
+.nh th { color:#00437f; font-size:12px !important; font-style:italic !important; padding:0 0 0 5px; text-align:left; }
+.nh td { color:#00437f; font-size:12px !important; font-style:italic !important; padding:0 5px 0 0; text-align:right; }
+
+#com_watch, #com_add { margin:15px 0; }
+#com_add table { width:100%; background-color:#fff; }
+#com_add td { padding:10px; }
+#com_add textarea
+{
+	width:100%;
+	height:80px;
+	background-color:#FFF;
+	border:1px solid #99cf16;
+	font:normal 14px "Times New Roman", Times, serif;
+	color:#00437f;
+	vertical-align:middle;
+	padding:10px;
+	overflow-y:auto;
+}
+
+#com_tab { width:100%; }
+#com_tab th
+{
+	width:110px;
+	font:normal 12px Georgia, "Times New Roman", Times, serif;
+	font-style:italic;
+	text-align:left;
+	padding:5px 20px 5px 10px;
+	white-space:nowrap;
+}
+#com_tab th span { font-family:"Times New Roman", Times, serif; }
+#com_tab td
+{
+	font:normal 12px Georgia, "Times New Roman", Times, serif;
+	text-align:justify;
+	padding:5px 10px 5px 0;
+}
+.com_tr1 th, .com_tr1 td { background-color:#fff; color:#000; }
+.com_tr2 th, .com_tr2 td {  }
+
+#faqtab { width:100%; margin:40px 0 0 0; }
+#faqtab td { padding:0 0 20px 0; }
+.faqtab_tab { background-color:#fff; }
+.faqtab_tab td { padding:10px !important; color:#000; }
+
+#navigate table { width:100%; margin:0 0 20px 0; }
+#navigate td { font-size:10px; padding:0;  }
+#navigate span, #navigate a { color:#030303; }
+#navigate a, #navigate a:visited {  font-size:10px; }
+#navigate a:hover { color:#080c43; font-size:10px; text-decoration:underline; }
+
+#filters th { width:25px; padding:0; font-size:1px; text-align:left; }
+#filters th input { padding:0; margin:0; }
+#filters td { font-size:14px; font-style:italic; text-align:left; width:140px; }
+
+/* таблица списка товаров */
+.list_tab td
+{
+	font:normal 14px "Times New Roman", Times, serif; 
+	color:#080c43;
+}
+.list_tab th { font-size:1px; padding-left:2px; background:url(/img/th.png) repeat-y; }
+.list_tab a, .list_tab a:visited, .list_tab a:hover { font:normal 14px "Times New Roman", Times, serif; color:#080c43; }
+.list_tab a, .list_tab a:visited { text-decoration:underline;}
+.list_tab a:hover { text-decoration:none; }
+.td1_left, .td2_left, .td1_right, .td2_right { font-size:1px; }
+.sep_head, .sep_tr { padding:0; font-size:1px; }
+.sep_head { height:5px; }
+.sep_tr { height:2px; }
+.tr_head td { text-align:center; }
+.tr_head span { font:normal 16px Georgia, "Times New Roman", Times, serif; }
+.tr_str td { text-align:center; }
+.tab_left, .tab_right { width:100%; height:100%; }
+.td11_left  { padding-left:10px; height:10px; background:url(/img/td11_left.png) no-repeat; }
+.td21_left  { background:#fff; }
+.td31_left  { height:10px; background:url(/img/td31_left.png) no-repeat; }
+.td11_right { padding-left:10px; height:10px; background:url(/img/td11_right.png) no-repeat; }
+.td21_right { background-color:#fff; }
+.td31_right { height:10px; background:url(/img/td31_right.png) no-repeat; }
+	.td12_left  { padding-left:10px; height:10px; background:url(/img/td12_left.png) no-repeat; }
+	.td22_left  { background:#fff; }
+	.td32_left  { height:10px; background:url(/img/td32_left.png) no-repeat; }
+	.td12_right { padding-left:10px; height:10px; background:url(/img/td12_right.png) no-repeat; }
+	.td22_right { background-color:#fff; }
+	.td32_right { height:10px; background:url(/img/td32_right.png) no-repeat; }
+/* // таблица списка товаров */
+
+.tocart { cursor:pointer; }
+.tocartG, .tocartG_ { width:123px; height:41px; }
+.tocartG { background:url(/img/tocart.png) no-repeat; cursor:pointer; }
+.tocartG_ { background:url(/img/tocart_.png) no-repeat; }
+
+.chkol { width:56px; height:19px; border:1px solid #99cf16; display:inline-block; font-size:1px; }
+.chkol .field { width:36px; font-size:1px; overflow:hidden; background-color:#FFF; }
+.chkol .field input { width:25px; height:19px; padding:0 0 0 6px; border:none; background:none; font:normal 12px Arial; color:#00437f; }
+.chkol .str { position:absolute; z-index:1; width:21px; height:20px; margin:0 0 0 36px; font-size:1px; background-color:#99cf16; }
+.chkol .str .more, .chkol .str .less { font-size:0; }
+.chkol .str .more div, .chkol .str .less div { position:absolute; cursor:pointer; width:19px; height:9px; font-size:0; }
+.chkol .str .more div { margin:0 0 1px 1px; background:url(/img/chkol.png) scroll no-repeat 0 0; }
+.chkol .str .less div { margin:10px 0 0 1px; background:url(/img/chkol.png) scroll no-repeat 0 -9px; }
+.chkol .str .more:hover div { background:url(/img/chkol.png) scroll no-repeat -19px 0; }
+.chkol .str .less:hover div { background:url(/img/chkol.png) scroll no-repeat -19px -9px; }
+
+.sale { position:absolute; width:24px; height:24px; background:url(/img/sale.png) no-repeat; margin:-2px 0 0 0; }
+
+.pop_win_block { position:absolute; width:369px; height:278px; z-index:5; /*display:block;*/ display:none; }
+.pop_exit { position:absolute; width:11px; height:12px; background:url(/img/pop_exit.png) no-repeat; margin:40px 0 0 315px; cursor:pointer; }
+.pop_win_tab { width:100%; height:100%; }
+.pop_win_l { padding-left:63px; background:url(/img/pop_l.png) no-repeat; }
+.pop_win_r { padding-left:37px; background:url(/img/pop_r.png) no-repeat; }
+.pop_win_u { height:29px; background:url(/img/pop_u.png) repeat-x; }
+.pop_win_b { height:29px; background:url(/img/pop_b.png) repeat-x; }
+.pop_win_c { background-color:#FFF; width:100%; }
+
+#prof_str { margin:20px 0; font-size:14px;  font-style:italic; }
+#prof_str span { color:#080c43; font-weight:bold; }
+
+#footer { width:100%; height:81px; }
+#footer_left { padding-left:10px; background:url(/img/footer_left.png) no-repeat; }
+#footer_center { background-color:white; width:100%; padding:0 5px; }
+#footer_right { padding-left:10px; background:url(/img/footer_right.png) no-repeat; }
+#footer table { width:100%; height:100%; }
+#footer table td { font:normal 10px Georgia, "Times New Roman", Times, serif; font-style:italic; color:#00437f; }
+.lsmall, .lsmall:visited, .lsmall:hover { font-size:10px; color:#00437f; }
+#bus
+{
+	position: absolute;
+	width:521px;
+	height:113px;
+	margin:-154px 0 0 -521px;
+}
+
+#zapros { font-size:16px; color:#99CF16; text-transform:uppercase; border-bottom:1px dashed #99CF16; cursor:pointer; }
+#zapros_shassi, #zapros_catalog { font-size:16px; color:#3EA304; border-bottom:1px dashed #99CF16; cursor:pointer; }
+.kpps { font-size:16px; font-style:normal; }
+#zapros_catalog { left: -500px; }
+#pop_zapros { left:500px; }
+#frm_zapros { width:100%; height:100%; }
+#frm_zapros .ar { padding:25px 15px 0 15px; font-size:14px; color:#00437f; font-style:italic; }
+#frm_zapros .ar .kol .h { float:left; padding-right:10px; }
+#frm_zapros .ar .kol .chkol { float:left; }
+#frm_zapros .ar .notes { clear:both; padding:10px 0 20px; }
+#frm_zapros .ar .notes .h span { color:#CCC; }
+#frm_zapros .ar .notes textarea { width:100%; height:80px; }
+
+.plus { font:26px Arial; color:#3ea304; }
+
+.features { width:100%; }
+.features th, .features td { font:14px Verdana!important; border-bottom:2px solid white; padding:2px 0; }
+.features th { font-weight:normal; text-align:left; }
+.features td { text-align:right; }
+
+	.str_page
+	{
+		width:100%;
+		height:18px;
+		background-color: #fff;
+		margin:5px 0 5px 0;
+	}
+	.str_page td
+	{
+		padding:0 5px;
+		font:normal 12px "Times New Roman", Times, serif;
+		color:#0060b6;
+	}
+	.str_page span, .str_page select
+	{
+		color:#000;
+	}
+	.str_page a, .str_page a:visited
+	{
+		font:normal 12px "Times New Roman", Times, serif;
+		color:#0060b6;
+		text-decoration:underline;
+	}
+	.str_page a:hover
+	{
+		font:normal 12px "Times New Roman", Times, serif;
+		color:#99CF16;
+		text-decoration:none;
+	}
+
+.tbl_left td, .tbl_left th, .manager { font-family:Arial; }
+
+
+
+
+
+
+
+
+

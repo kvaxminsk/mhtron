@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * Page used to upload new files in the current folder.
+-->
+<html>
+	<head>
+		<title>Закачка файла</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="browser.css" type="text/css" rel="stylesheet" >
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="swfupload/swfupload.js"></script>
+		<script type="text/javascript" src="swfupload/plugins/swfupload.swfobject.js"></script>
+		<script type="text/javascript" src="swfupload/js/fileprogress.js"></script>
+		<script type="text/javascript" src="swfupload/js/handlers.js"></script>
+		<script type="text/javascript">
+
+function SetCurrentFolder( resourceType, folderPath )
+{
+	var sUrl = oConnector.ConnectorUrl + 'Command=FileUpload' ;
+	sUrl += '&Type=' + resourceType ;
+	sUrl += '&CurrentFolder=' + encodeURIComponent( folderPath ) ;
+
+	document.getElementById('frmUpload').action = sUrl ;
+	SetThumb(resourceType);
+}
+
+function OnSubmit()
+{
+	if ( document.getElementById('NewFile').value.length == 0 )
+	{
+		alert( 'Пожалуйста выберите файл' ) ;
+		return false ;
+	}
+
+	// Set the interface elements.
+	document.getElementById('eUploadMessage').innerHTML = 'Закачивание нового ыайла в эту папку. Подождите...' ;
+	document.getElementById('btnUpload').disabled = true ;
+
+	return true ;
+}
+
+function OnUploadCompleted( errorNumber, data )
+{
+	//alert(window.parent.frames['frmUploadWorker'].document.body.innerHTML);
+	
+	// Reset the Upload Worker Frame.
+	window.parent.frames['frmUploadWorker'].location = 'javascript:void(0)' ;
+
+	// Reset the upload form (On IE we must do a little trick to avoid problems).
+	if ( document.all )
+		document.getElementById('NewFile').outerHTML = '<input id="NewFile" name="NewFile" style="WIDTH: 100%" type="file">' ;
+	else
+		document.getElementById('frmUpload').reset() ;
+
+	// Reset the interface elements.
+	document.getElementById('eUploadMessage').innerHTML = 'Закачать новый файл в эту папку' ;
+	document.getElementById('btnUpload').disabled = false ;
+
+	switch ( errorNumber )
+	{
+		case 0 :
+			window.parent.frames['frmResourcesList'].Refresh() ;
+			break ;
+		case 1 :	// Custom error.
+			alert( data ) ;
+			break ;
+		case 201 :
+			window.parent.frames['frmResourcesList'].Refresh() ;
+			alert( 'Файл с таким именем уже существует. Закачиваемый файл переименован в "' + data + '"' ) ;
+			break ;
+		case 202 :
+			alert( 'Недопустимый файл' ) ;
+			break ;
+		default :
+			alert( 'Ошибка при закачивании. Ошибка номер: ' + errorNumber ) ;
+			break ;
+	}
+}
+
+function SetThumb(type) {
+        if (Config.ThumbCreate && type == 'Image')
+            document.getElementById('thumb_box').style.display = 'block';
+        else
+            document.getElementById('thumb_box').style.display = 'none';
+				//if (Config.SWFUpload) {
+				//	swfu.setFileTypes(oConnector.ResourceType, swfExt());
+				//}
+}
+
+function kp(evt) {
+        if (evt.keyCode==46 || evt.keyCode==8 || evt.keyCode==37 || evt.keyCode==39 || evt.keyCode==109) return true;
+        if (evt.keyCode<48 || evt.keyCode>57) return false;
+}
+
+function thumbHelp() {
+	var popup = window.open('', 'thumb_help', 'left=150,top=250,width=500,height=300,scrollbars=yes');
+	popup.document.write(
+		'<head>'+
+		'<title>Изменение размера &mdash; Помощь</title>'+
+		'<head>'+
+		'<body>'+
+		'<h2>Изменение размеров изображения</h2>'+
+		'<p>Вы можете сразу при загрузке изменить размер изображения.</p><p>Возможности:</p>'+
+		'<ol>'+
+		'<li>Если задать ширину и высоту, то изображение впишется в эти размеры, сохраняя пропорции.</li>'+
+		'<li>Если один из параметров установить в 0, то этот параметр установится в соответствии с пропорциями.</li>'+
+		'<li>Если хотя бы один параметр отрицательный, то из изображения вырежется кусок максимального размера, в центре изображения и уменьшенный до введенных размеров.</li>'+
+		'</ol>'+
+		'</body>'+
+		'</html>'
+	);
+	popup.focus();
+}
+
+function swfExt() {
+		var te = Config['AllowedExtensions'][oConnector.ResourceType];
+		var ret = '';
+		for(i=0; i<te.length; i++) ret += te[i]?'*.'+te[i]+';':'';
+		return ret.substr(0, ret.length-1);
+}
+
+window.onload = function()
+{
+	window.top.IsLoadedUpload = true ;
+	Config = window.top.Config;
+	
+	swfu = new SWFUpload({
+		// Backend settings
+		upload_url: "../../../connectors/php/swf_upload.php",	// Relative to the SWF file, you can use an absolute URL as well.
+		file_post_name: "resume_file",
+
+		// Flash file settings
+		//file_size_limit : "10 MB",
+		file_types : swfExt(),			// or you could use something like: "*.doc;*.wpd;*.pdf",
+		file_types_description : oConnector.ResourceType,
+		file_upload_limit : "0",
+		file_queue_limit : "1",
+
+		// Event handler settings
+		swfupload_loaded_handler : swfUploadLoaded,
+		
+		file_dialog_start_handler: fileDialogStart,
+		file_queued_handler : fileQueued,
+		file_queue_error_handler : fileQueueError,
+		file_dialog_complete_handler : fileDialogComplete,
+		
+		//upload_start_handler : uploadStart,	// I could do some client/JavaScript validation here, but I don't need to.
+		upload_progress_handler : uploadProgress,
+		//upload_error_handler : uploadError,
+		//upload_success_handler : uploadSuccess,
+		upload_complete_handler : uploadComplete,
+
+		// Button Settings
+		button_image_url : "swfupload/upload.png",	// Relative to the SWF file
+		button_placeholder_id : "btnUploadSWF",
+		button_width: 61,
+		button_height: 22,
+		
+		// Flash Settings
+		flash_url : "swfupload/swfupload.swf",
+
+		custom_settings : {
+			progress_target : "fsUploadProgress",
+			upload_successful : false
+		},
+		
+		// Debug settings
+		debug: false
+	});
+}
+		</script>
+	</head>
+	<body>
+		<form id="frmUpload" action="" target="frmUploadWorker" method="post" enctype="multipart/form-data" onsubmit="return OnSubmit();">
+			<table class="fullHeight" cellspacing="0" cellpadding="0" width="100%" border="0">
+				<tr>
+					<td nowrap="nowrap">
+						<span id="eUploadMessage">Закачать новый файл в эту папку</span>
+						<table cellspacing="0" cellpadding="0" width="100%" border="0" style="margin-top: 5px">
+							<tr>
+								<td width="100%">
+									<table cellspacing="0" cellpadding="0" width="98%" border="0">
+										<tr>
+											<td width="100%">
+												<input type="text" style="WIDTH: 99%" id="txtFileName" disabled/>
+												<div class="flash" id="fsUploadProgress"></div>
+											</td>
+											<td id="btnUploadSWF"></td>
+									</table>
+								</td>
+								<td nowrap>
+									<table id="thumb_box" style="display: none;" cellspacing="0" cellpadding="0">
+										<tr>
+											<td nowrap> &nbsp; ширина <input type="text" onKeyDown="return kp(event)" style="width: 30px" id="thumb_x" name="thumb_x" value="100"></td>
+											<td nowrap>, высота <input type="text" onKeyDown="return kp(event)" style="width: 30px" id="thumb_y" name="thumb_y" value="0"> &nbsp; </td>
+											<td><input type="checkbox" id="thumb" name="thumb"></td>
+											<td nowrap> <label for="thumb">изменить</label> <a href="javascript:thumbHelp()">?</a> &nbsp; &nbsp; </td>
+										</tr>
+									</table>
+								</td>
+								<td nowrap>&nbsp;<input id="btnSubmit" type="submit" value="Закачать"/></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

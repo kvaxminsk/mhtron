@@ -1,0 +1,25 @@
+﻿/* ---------------------- arrnum ---------------------------- */
+.arrnum { height:16px; border-collapse:collapse; border:none; background:none; }
+.arrnum td, .arrnum th  { padding:0; border:none; background:none; }
+.arrnum th  { width:7px; vertical-align:top; }
+.arrnum input
+{
+	width:30px;
+	height:16px;
+	text-align:center;
+	border:1px solid #000;
+	background-color:#FFF;
+	font: normal 12px Arial, Helvetica, sans-serif;
+}
+.str_up, .str_down { position:absolute; width:7px; height:4px; cursor:pointer; }
+.str_up
+{
+	background:url(/img/str_up.gif) no-repeat;
+	margin:1px 0 0 5px;	
+}
+.str_down
+{
+	background:url(/img/str_down.gif) no-repeat;
+	margin:11px 0 0 5px;
+}
+/* -------------------------- / arrnum ---------------------------- */

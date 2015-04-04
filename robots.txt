@@ -1,0 +1,4 @@
+User-agent: *
+Host: xn----7sba0ah1bdrchd7c.xn--p1ai
+Disallow: *.cgi
+Disallow: /admin
